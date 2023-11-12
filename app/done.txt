@@ -1,0 +1,15 @@
+done till now 
+
+- create user 
+-get notices 
+-post notices 
+-post lecture 
+-get lecture
+-login is wrking 
+-get profile
+-upload assignment 
+-read assignment 
+-upload document 
+-get document
+-post complaint
+-get complaint
