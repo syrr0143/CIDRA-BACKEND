@@ -52,10 +52,10 @@ router.post('/login', async (req, res) => {
     }
 
     // Generate a JWT token
-    const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1h' }); // Replace 'your-secret-key' with your actual secret key
+    const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '3d' }); // Replace 'your-secret-key' with your actual secret key
 
     // Set the token as a cookie (optional)
-    res.cookie('token', token, { httpOnly: true, maxAge: 3600000 }); // Max age is set to 1 hour in milliseconds
+    res.cookie('token', token, { httpOnly: true, maxAge: 259200000 }); // Max age is set to 1 hour in milliseconds
 
     res.status(200).json({ message: 'Login successful', token });
   } catch (error) {
