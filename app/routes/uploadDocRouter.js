@@ -14,12 +14,13 @@ router.post('/upload-doc', authMiddleware, upload.single('document'), async (req
     // The authMiddleware should set the user details in the request
      // Check if req.file exists and use req.file.buffer
      const pdfContent = req.file ? req.file.document : null;
+     const { title } = req.body;
 
      const author = req.user._id;
 
 
     // Create a new document record
-    const newDocument = new Pdf({ author, document: pdfContent });
+    const newDocument = new Pdf({ title,author, document: pdfContent });
 
     await newDocument.save();
 
