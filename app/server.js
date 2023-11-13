@@ -40,6 +40,11 @@ app.use('/documents', uploadDocRouter);
 app.use('/assignment', assignmentRoutes);
 app.use('/complaint', complaintRoutes);
 
+
+app.get('/', (req,res)=> {
+  res.send('Root Page');
+})
+
 // Start the server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
