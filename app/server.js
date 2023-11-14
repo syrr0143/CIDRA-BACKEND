@@ -11,7 +11,7 @@ const complaintRoutes = require('./routes/complaintRouter');
 const uploadDocRouter = require('./routes/uploadDocRouter');
 const assignmentRoutes = require('./routes/assignmentRoute');
 const profileRoutes = require('./routes/profileRouter');
-
+const cors = require("cors");
 const pdfRoutes = require('./routes/uploadDocRouter'); // New route for PDFs
 const databaseConfig = require('./config/database-config');
 
@@ -28,6 +28,7 @@ mongoose.connect(databaseConfig.url, databaseConfig.options)
   });
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 
 // Routes

@@ -13,3 +13,9 @@ done till now
 -get document
 -post complaint
 -get complaint
+
+
+remained 
+-creating teacher 
+-login teacher
+-image of user  
