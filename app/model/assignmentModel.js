@@ -7,7 +7,7 @@ const assignmentSchema = new mongoose.Schema({
   content: { type: String, required: true },
   dueDate: { type: Date, required: true },
   googleFormLink: { type: String, required: true },
-  pdf: { type: Buffer, required: true }, // Buffer to store PDF data
+  pdf: { type: Buffer, required: false }, // Buffer to store PDF data
 });
 
 const Assignment = mongoose.model('Assignment', assignmentSchema);

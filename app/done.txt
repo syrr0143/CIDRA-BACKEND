@@ -19,3 +19,4 @@ remained
 -creating teacher 
 -login teacher
 -image of user  
+-getting dulicate error whule creating the new user 

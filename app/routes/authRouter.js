@@ -15,24 +15,22 @@ router.post('/signup', async (req, res) => {
 
     // Check if the username is already taken
     const existingUser = await User.findOne({ rollNo });
-    if (existingUser) {
-      return res.status(400).json({ error: 'Username already exists' });
-    }
+if (existingUser) {
+  return res.status(400).json({ error: 'Username already exists', existingUser });
+}
+
 
     // Create a new user
     const newUser = new User({ name , password,rollNo,dob,email,mobileNumber,address});
-
-    // // Hash the password before saving to the database
-    // const hash = await bcrypt.hash(newUser.password, 10);
-    // newUser.password = hash;
 
     await newUser.save();
 
     res.status(201).json({ message: 'User registered successfully' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: 'Internal server error', details: error.message });
   }
+  
 });
 //Login route is POST: http://localhost:3000/auth/login
 router.post('/login', async (req, res) => {
