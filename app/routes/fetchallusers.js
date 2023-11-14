@@ -39,6 +39,7 @@ router.get('/all-teacher', teacherauthMiddleware, async (req, res) => {
       // Exclude sensitive information like passwords before sending the response
       const sanitizedteachers = allteacher.map(teacher => ({
         name: teacher.name,
+        id:teacher.id,
         rollNo: teacher.rollNo,
         dob: teacher.dob,
         email: teacher.email,
