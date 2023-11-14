@@ -12,9 +12,10 @@ router.post('/submit-complaint', authMiddleware, async (req, res) => {
 
     // The authMiddleware should set the user details in the request
     const author = req.user._id;
+    const authorname = req.user.name;
 
     // Create a new complaint
-    const newComplaint = new Complaint({ author, content });
+    const newComplaint = new Complaint({ author,authorname, content });
 
     await newComplaint.save();
 
@@ -28,7 +29,7 @@ router.post('/submit-complaint', authMiddleware, async (req, res) => {
 // Get all complaints (for admin use)
 router.get('/complaints', async (req, res) => {
   try {
-    const complaints = await Complaint.find().sort({ time: 'desc' });
+    const complaints = await Complaint.find().sort({ time: 'desc' }).populate('author', 'name');;
 
     res.status(200).json({ complaints });
   } catch (error) {
