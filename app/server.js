@@ -11,6 +11,8 @@ const complaintRoutes = require('./routes/complaintRouter');
 const uploadDocRouter = require('./routes/uploadDocRouter');
 const assignmentRoutes = require('./routes/assignmentRoute');
 const profileRoutes = require('./routes/profileRouter');
+const fetchuserRoutes = require('./routes/fetchallusers');
+const searchRoutes = require('./routes/searchRouter');
 const cors = require("cors");
 const pdfRoutes = require('./routes/uploadDocRouter'); // New route for PDFs
 const databaseConfig = require('./config/database-config');
@@ -40,6 +42,8 @@ app.use('/profile', profileRoutes);
 app.use('/documents', uploadDocRouter);
 app.use('/assignment', assignmentRoutes);
 app.use('/complaint', complaintRoutes);
+app.use('/', fetchuserRoutes);
+app.use('/', searchRoutes);
 
 
 app.get('/', (req,res)=> {
