@@ -8,6 +8,8 @@ const router = express.Router();
 // Admin posts a lecture
 router.post('/post-lecture', teacherauthMiddleware, async (req, res) => {
   try {
+    console.log('req.teacher:', req.teacher);
+   
     const { content, link } = req.body;
 
     // The authMiddleware should set the user details in the request

@@ -5,7 +5,7 @@ const lectureSchema = new mongoose.Schema({
   content: { type: String, required: true },
   link: { type: String, required: true },
   date: { type: Date, default: Date.now },
-  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'teacher', required: true },
 });
 
 const Lecture = mongoose.model('Lecture', lectureSchema);
