@@ -16,10 +16,10 @@ done till now
 
 
 remained 
--creating teacher 
--login teacher
+
 -image of user  
 -document is not uploading in assignment and upload doc
+
 
 authorise tokem-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTUwNjFjZDAwYzk1ZjYwODIzMjAzM2UiLCJpYXQiOjE2OTk5NjQ3NTUsImV4cCI6MTcwMDIyMzk1NX0.c14FdfoQMcwdVn84ffesdgP6DdpdV9X6ckXGAlI-f6A
 

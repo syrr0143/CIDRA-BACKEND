@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../model/userModel');
 const teacher = require('../model/teacherModel');
 const authMiddleware = require('../middleware/authmiddleware');
+const teacherauthMiddleware = require('../middleware/teacherauthmiddleware');
 
 const router = express.Router();
 
@@ -108,6 +109,7 @@ router.post('/loginteacher', async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
+    
     // Generate a JWT token
     const token = jwt.sign({ teacherId: foundTeacher._id }, 'your-secret-key', { expiresIn: '3d' }); // Replace 'your-secret-key' with your actual secret key
 
@@ -122,6 +124,10 @@ router.post('/loginteacher', async (req, res) => {
 });
 // Example protected route using authMiddleware
 router.get('/protected-route', authMiddleware, (req, res) => {
+  // This route is protected, only accessible with a valid token
+  res.status(200).json({ message: 'Protected route accessed successfully' });
+});
+router.get('/protected-routes', teacherauthMiddleware, (req, res) => {
   // This route is protected, only accessible with a valid token
   res.status(200).json({ message: 'Protected route accessed successfully' });
 });
