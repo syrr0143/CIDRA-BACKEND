@@ -14,9 +14,10 @@ router.post('/post-lecture', teacherauthMiddleware, async (req, res) => {
 
     // The authMiddleware should set the user details in the request
     const author = req.teacher._id;
+    const authorname = req.teacher.name;
 
     // Create a new lecture
-    const newLecture = new Lecture({ content, link, author });
+    const newLecture = new Lecture({ content, link, author,authorname });
 
     await newLecture.save();
 
