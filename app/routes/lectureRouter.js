@@ -37,4 +37,33 @@ router.get('/lectures', async (req, res) => {
   }
 });
 
+
+
+// Get lectures posted by the logged-in teacher
+router.get('/get-lectures', teacherauthMiddleware, async (req, res) => {
+  try {
+    // The teacherauthMiddleware should set the user details in the request
+    const authorId = req.teacher._id;
+
+    // Fetch lectures posted by the logged-in teacher
+    const lectures = await Lecture.find({ author: authorId });
+
+    // If no lectures are found, return a message
+    if (lectures.length === 0) {
+      return res.status(404).json({ message: 'No lectures found for this teacher' });
+    }
+
+    // Format and send the response
+    const formattedLectures = lectures.map(lecture => ({
+      content: lecture.content,
+      link: lecture.link,
+      // Add any other properties you want to include
+    }));
+
+    res.status(200).json({ lectures: formattedLectures });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 module.exports = router;
