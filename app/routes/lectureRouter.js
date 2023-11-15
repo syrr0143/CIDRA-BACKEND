@@ -15,6 +15,7 @@ router.post('/post-lecture', teacherauthMiddleware, async (req, res) => {
     // The authMiddleware should set the user details in the request
     const author = req.teacher._id;
     const authorname = req.teacher.name;
+    console.log(req.teacher.name)
 
     // Create a new lecture
     const newLecture = new Lecture({ content, link, author,authorname });
@@ -32,8 +33,16 @@ router.post('/post-lecture', teacherauthMiddleware, async (req, res) => {
 router.get('/lectures', async (req, res) => {
   try {
     // const lectures = await Lecture.find().sort({ date: 'desc' });
-    const lectures = await Lecture.find().populate('author', 'name').sort({ date: 'desc' });
-    res.status(200).json({ lectures });
+    const lectures = await Lecture.find().sort({ time: 'desc' }).populate('author', 'name').sort({ date: 'desc' });
+    const formattedLectures = lectures.map(lecture => ({
+      
+      content: lecture.content,
+      link: lecture.link,
+      author: lecture.authorname, // Include author's name separately
+      date: lecture.date,
+      
+    }));
+    res.status(200).json({ lectures:formattedLectures  });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });
