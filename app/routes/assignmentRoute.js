@@ -17,7 +17,7 @@ router.post('/post-assignment', teacherAuthMiddleware, upload.single('pdf'), asy
         // Check if req.file exists and use req.file.buffer
         const pdfContent = req.file ? req.file.buffer : null;
     // The authMiddleware should set the user details in the request
-    const author = req.user.name; // Assuming your user model has a 'name' field
+    const author = req.teacher.name; // Assuming your user model has a 'name' field
 
     // Create a new assignment
     const newAssignment = new Assignment({
@@ -33,7 +33,7 @@ router.post('/post-assignment', teacherAuthMiddleware, upload.single('pdf'), asy
     res.status(201).json({ message: 'Assignment posted successfully' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: 'Internal server error',details: error.message });
   }
 });
 
