@@ -15,7 +15,7 @@ router.post('/upload-doc', teacherAuthMiddleware, upload.single('document'), asy
     const { title } = req.body;
 
     // The authMiddleware should set the user details in the request
-    const author = req.user._id;
+    const author = req.teacher._id;
 
     // Create a new document record
     const newDocument = new Pdf({ title, author, document: pdfContent });
@@ -32,7 +32,7 @@ router.post('/upload-doc', teacherAuthMiddleware, upload.single('document'), asy
 // Get all uploaded documents
 router.get('/documents', async (req, res) => {
   try {
-    const documents = await Pdf.find().sort({ date: 'desc' });
+    const documents = await Pdf.find().sort({ date: 'desc' }).populate('author', 'name');
 
     res.status(200).json({ documents });
   } catch (error) {
