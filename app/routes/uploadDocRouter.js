@@ -25,7 +25,7 @@ router.post('/upload-doc', teacherAuthMiddleware, upload.single('document'), asy
     res.status(201).json({ message: 'Document uploaded successfully' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: 'Internal server error',details: error.message });
   }
 });
 
