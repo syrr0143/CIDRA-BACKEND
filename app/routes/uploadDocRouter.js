@@ -1,14 +1,14 @@
 
 const express = require('express');
 const Pdf = require('../model/uploadDocModel');
-const authMiddleware = require('../middleware/authmiddleware');
+const teacherAuthMiddleware = require('../middleware/teacherauthmiddleware');
 const multer = require('multer');
 
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
 // User uploads a document
-router.post('/upload-doc', authMiddleware, upload.single('document'), async (req, res) => {
+router.post('/upload-doc', teacherAuthMiddleware, upload.single('document'), async (req, res) => {
   try {
     // Check if req.file exists and use req.file.buffer
     const pdfContent = req.file ? req.file.buffer : null;

@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const multer = require('multer');
 const jwt = require('jsonwebtoken');
 const User = require('../model/userModel');
 const teacher = require('../model/teacherModel');
@@ -7,6 +8,17 @@ const authMiddleware = require('../middleware/authmiddleware');
 const teacherauthMiddleware = require('../middleware/teacherauthmiddleware');
 
 const router = express.Router();
+
+// Multer configuration for handling file uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/'); // Specify the directory where you want to store uploaded files
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname); // Unique filename to avoid conflicts
+  }
+});
+const upload = multer({ storage: storage });
 
 // Signup route is POST: http://localhost:3000/auth/signup
 
@@ -34,6 +46,27 @@ if (existingUser) {
   }
   
 });
+
+// Image upload route
+router.post('/uploadProfilePhoto', upload.single('profilePhoto'), async (req, res) => {
+  try {
+    const userId = req.body.userId; // Assuming you are passing the user ID in the request body
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    user.profilePhotoUrl = req.file.path; // Save the file path to the user's profilePhotoUrl field
+    await user.save();
+
+    res.status(200).json({ message: 'Profile photo uploaded successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error', details: error.message });
+  }
+});
+
 //Login route is POST: http://localhost:3000/auth/login
 router.post('/login', async (req, res) => {
   try {
