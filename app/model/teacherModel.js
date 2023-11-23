@@ -18,6 +18,7 @@ const teacherSchema = new mongoose.Schema({
   },
   mobileNumber: { type: String, required: true },
   department: { type: String, required: true },
+  profilePhotoUrl:{type:String}
 });
 
 const teacher = mongoose.model('teacher', teacherSchema);

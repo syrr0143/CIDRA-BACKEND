@@ -13,7 +13,7 @@ const router = express.Router();
 router.post('/signup', async (req, res) => {
   try {
     console.log('Received request body:', req.body);
-    const { name , password,rollNo,dob,email,mobileNumber,address} = req.body;
+    const { name , password,rollNo,dob,email,mobileNumber,address,profilePhotoUrl} = req.body;
 
     // Check if the username is already taken
     const existingUser = await User.findOne({ rollNo });
@@ -23,7 +23,7 @@ if (existingUser) {
 
 
     // Create a new user
-    const newUser = new User({ name , password,rollNo,dob,email,mobileNumber,address});
+    const newUser = new User({ name , password,rollNo,dob,email,mobileNumber,address,profilePhotoUrl});
 
     await newUser.save();
 
@@ -71,7 +71,7 @@ router.post('/login', async (req, res) => {
 router.post('/signupteacher', async (req, res) => {
   try {
     console.log('Received request body:', req.body);
-    const { name , password,id,dob,email,mobileNumber,department} = req.body;
+    const { name , password,id,dob,email,mobileNumber,department,profilePhotoUrl} = req.body;
 
     // Check if the username is already taken
     const existingteacher = await teacher.findOne({ id });
@@ -81,7 +81,7 @@ if (existingteacher) {
 
 
     // Create a new user
-    const newteacher = new teacher({ name , password,id,dob,email,mobileNumber,department});
+    const newteacher = new teacher({ name , password,id,dob,email,mobileNumber,department,profilePhotoUrl});
 
     await newteacher.save();
 

@@ -20,6 +20,7 @@ router.get('/all-users', teacherauthMiddleware, async (req, res) => {
       email: user.email,
       mobileNumber: user.mobileNumber,
       address: user.address,
+      profilePhotoUrl:user.profilePhotoUrl
     }));
 
     res.status(200).json({ users: sanitizedUsers });
@@ -45,6 +46,7 @@ router.get('/all-teacher', teacherauthMiddleware, async (req, res) => {
         email: teacher.email,
         mobileNumber: teacher.mobileNumber,
         address: teacher.address,
+        profilePhotoUrl: teacher.profilePhotoUrl,
       }));
   
       res.status(200).json({ teacherers: sanitizedteachers });

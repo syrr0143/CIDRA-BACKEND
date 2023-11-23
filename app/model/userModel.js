@@ -18,16 +18,11 @@ const userSchema = new mongoose.Schema({
   },
   mobileNumber: { type: String, required: true },
   address: { type: String, required: true },
+  profilePhotoUrl:{ type: String },
 });
 
 
-// Hash the password before saving to the database
-// userSchema.pre('save', async function (next) {
-//   const user = this;
-//   const hash = await bcrypt.hash(user.password, 10);
-//   user.password = hash;
-//   next();
-// });
+
 
 const User = mongoose.model('User', userSchema);
 
