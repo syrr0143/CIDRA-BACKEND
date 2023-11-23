@@ -2,13 +2,14 @@
 const express = require('express');
 const Assignment = require('../model/assignmentModel');
 const authMiddleware = require('../middleware/authmiddleware');
+const teacherAuthMiddleware = require('../middleware/teacherauthmiddleware');
 const multer = require('multer');
 
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
 // Admin posts an assignment
-router.post('/post-assignment', authMiddleware, upload.single('pdf'), async (req, res) => {
+router.post('/post-assignment', teacherAuthMiddleware, upload.single('pdf'), async (req, res) => {
   try {
     const { content, dueDate, googleFormLink } = req.body;
 
