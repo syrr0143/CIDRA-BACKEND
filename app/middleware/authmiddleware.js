@@ -1,6 +1,7 @@
 
 const jwt = require('jsonwebtoken');
 const User = require('../model/userModel'); // Assuming you have a User model
+require('dotenv').config();
 
 const authMiddleware = async (req, res, next) => {
   // Get the token from the request headers
@@ -13,7 +14,7 @@ const authMiddleware = async (req, res, next) => {
 
   try {
     // Verify the token
-    const decoded = jwt.verify(token, 'your-secret-key'); // Replace 'your-secret-key' with your actual secret key
+    const decoded = jwt.verify(token, process.env.secret_key); // Replace 'your-secret-key' with your actual secret key
 
     // Find the user based on the decoded information
     const user = await User.findById(decoded.userId);

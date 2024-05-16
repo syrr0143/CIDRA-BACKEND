@@ -5,6 +5,7 @@ const User = require('../model/userModel');
 const teacher = require('../model/teacherModel');
 const authMiddleware = require('../middleware/authmiddleware');
 const teacherauthMiddleware = require('../middleware/teacherauthmiddleware');
+require('dotenv').config();
 
 const router = express.Router();
 
@@ -45,14 +46,14 @@ router.post('/login', async (req, res) => {
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
-
+    // this code is given by s_u_m_i_t__y_a_d_a_v
     // Check if the provided password matches the hashed password in the database
     if (password !== user.password) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
     // Generate a JWT token
-    const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '3d' }); // Replace 'your-secret-key' with your actual secret key
+    const token = jwt.sign({ userId: user._id }, process.env.secret_key, { expiresIn: '3d' }); // Replace 'your-secret-key' with your actual secret key
 
     // Set the token as a cookie (optional)
     res.cookie('token', token, { httpOnly: true, maxAge: 259200000 }); // Max age is set to 1 hour in milliseconds
@@ -111,7 +112,7 @@ router.post('/loginteacher', async (req, res) => {
 
     
     // Generate a JWT token
-    const token = jwt.sign({ teacherId: foundTeacher._id }, 'your-secret-key', { expiresIn: '3d' }); // Replace 'your-secret-key' with your actual secret key
+    const token = jwt.sign({ teacherId: foundTeacher._id }, process.env.secret_key, { expiresIn: '3d' }); // Replace 'your-secret-key' with your actual secret key
 
     // Set the token as a cookie (optional)
     res.cookie('token', token, { httpOnly: true, maxAge: 259200000 }); // Max age is set to 1 hour in milliseconds
@@ -122,6 +123,7 @@ router.post('/loginteacher', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
 // Example protected route using authMiddleware
 router.get('/protected-route', authMiddleware, (req, res) => {
   // This route is protected, only accessible with a valid token

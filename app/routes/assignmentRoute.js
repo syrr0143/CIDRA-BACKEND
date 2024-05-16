@@ -40,6 +40,7 @@ router.post('/post-assignment', teacherAuthMiddleware, upload.single('pdf'), asy
 
 router.get('/get-assignment', teacherAuthMiddleware, async (req, res) => {
   try {
+    // this code is given by s_u_m_i_t__y_a_d_a_v
     // The teacherauthMiddleware should set the user details in the request
     const authorId = req.teacher._id;
 

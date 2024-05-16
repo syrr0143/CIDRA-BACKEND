@@ -1,6 +1,7 @@
 // config/database.js
+require('dotenv').config();
 module.exports = {
-    url: 'mongodb+srv://cidra:cidra@cluster1.fasaaap.mongodb.net/?retryWrites=true&w=majority',
+    url: process.env.url,
     options: {},
   };
   

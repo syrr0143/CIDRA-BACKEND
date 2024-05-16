@@ -1,6 +1,7 @@
 // middleware/teacherauthMiddleware.js
 const jwt = require('jsonwebtoken');
 const teacherModel = require('../model/teacherModel');
+require('dotenv').config();
 
 const teacherauthMiddleware = async (req, res, next) => {
   // Get the token from the request headers
@@ -13,7 +14,7 @@ const teacherauthMiddleware = async (req, res, next) => {
 
   try {
     // Verify the token
-    const decoded = jwt.verify(token, 'your-secret-key'); // Replace 'your-secret-key' with your actual secret key
+    const decoded = jwt.verify(token, process.env.secret_key); // Replace 'your-secret-key' with your actual secret key
 
     console.log('Decoded Token:', decoded);
 

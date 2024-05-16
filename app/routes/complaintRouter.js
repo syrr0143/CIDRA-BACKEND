@@ -13,7 +13,7 @@ router.post('/submit-complaint', authMiddleware, async (req, res) => {
     // The authMiddleware should set the user details in the request
     const author = req.user._id;
     const authorname = req.user.name;
-
+// this code is given by s_u_m_i_t__y_a_d_a_v
     // Create a new complaint
     const newComplaint = new Complaint({ author,authorname, content });
 
